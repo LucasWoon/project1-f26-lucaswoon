@@ -6,15 +6,70 @@
     font-style: normal;
 } */
 
-.mainHeader {
+body {
+    width: 100vw;
+    height: 100vh;
     font-family: "Inter", sans-serif;
+    font-size: 1.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
+.mainHeader {
+    font-family: "Inter", sans-serif;
+    font-size: 3vw;
+}
 
+.bodySection {
+    display: flex;
+}
 
 .pokeImage {
-    width: 200px;
-    border-width: 3px;
+    width: 20vw;
+    border-width: 0.25vw;
     border-color: black;
     border-style: solid;
+}
+
+.pokeName {
+    background-color: #E8E8E8;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    text-align: center;
+    padding: 0.5vw;
+    border-radius: 0.5vw;
+}
+
+.arrows {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.arrowButton {
+    background-color: #E8E8E8;
+    border-style: none;
+    border-radius: 0.5vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    display: flex;
+    align-items: center;
+}
+
+.arrowButton:hover {
+    background-color: #E0E0E0;
+}
+
+.arrowButton:active {
+    background-color: #D0D0D0;
+}
+
+.arrowImage {
+    height: 2.5vw;
+}
+
+#rightArrow {
+    transform: scaleX(-1);
 }

@@ -1,4 +1,26 @@
 let pokeId = 1;
+const pokeIdMax = 1025;
+
+const typeColors = {
+    normal: "#A8A77A",
+    fire: "#EE8130",
+    water: "#6390F0",
+    electric: "#F7D02C",
+    grass: "#7AC74C",
+    ice: "#96D9D6",
+    fighting: "#C22E28",
+    poison: "#A33EA1",
+    ground: "#E2BF65",
+    flying: "#A98FF3",
+    psychic: "#F95587",
+    bug: "#A6B91A",
+    rock: "#B6A136",
+    ghost: "#735797",
+    dragon: "#6F35FC",
+    dark: "#705746",
+    steel: "#B7B7CE",
+    fairy: "#D685AD"
+}
 
 async function getPokemonData(id) {
     const response = await fetch('https://pokeapi.co/api/v2/pokemon/' + id);
@@ -12,16 +34,6 @@ async function getPokemonData(id) {
     return data;
 }
 
-// const getPokemonData = async function(id) {
-//     const response = await fetch('https://pokeapi.co/api/v2/pokemon/' + id);
-    
-//     if (!response.ok) {
-//         throw new Error("Pokemon not found.")
-//     }
-//     const data = await response.json();
-//     return data;
-// }
-
 async function updatePokemonData() {
     let data;
     try {
@@ -32,24 +44,47 @@ async function updatePokemonData() {
     }
     
     // update image
-    const pokeImage = document.querySelector('.pokeImage') 
+    const pokeImage = document.querySelector('.pokeImage');
     // I used official artwork instead of sprite because sprite was too blurry
     pokeImage.src = data.sprites.other["official-artwork"].front_default;
     pokeImage.alt = 'picture of ' + data.name;
 
     // update name
-    const pokeName = document.querySelector('.pokeName')
+    const pokeName = document.querySelector('.pokeName');
     pokeName.innerText = data.name;
 
-    // update types
-    pokeTypes = document.querySelector('.types')
-    pokeTypes.innerText = '';
+    // update types - need to create elements for each (and find a way to remove), and add color
+    document.querySelector('.pokeTypesContainer')?.remove();
+
+    const pokeTypesContainer = document.createElement('div');
+    pokeTypesContainer.classList.add('pokeTypesContainer');
+    document.querySelector('.types').append(pokeTypesContainer);
+
     data.types.forEach((eachType) => {
-        pokeTypes.innerText += eachType.type.name;
+        const pokeType = document.createElement('div');
+        pokeType.classList.add('pokeType');
+        pokeTypesContainer.append(pokeType);
+        pokeType.innerText = eachType.type.name;
+        pokeType.style.backgroundColor = typeColors[eachType.type.name];
     })
     
     //delete after
-    document.querySelector('.idThing').innerHTML = data.id
+    // document.querySelector('.idThing').innerHTML = data.id
 }
 
 updatePokemonData();
+
+document.getElementById('leftArrow').addEventListener('click', () => {
+    if (pokeId > 1) {
+        pokeId -= 1;
+        updatePokemonData();
+    }
+})
+
+document.getElementById('rightArrow').addEventListener('click', () => {
+    if (pokeId < pokeIdMax) {
+        pokeId += 1;
+        updatePokemonData();
+    }
+})
+
