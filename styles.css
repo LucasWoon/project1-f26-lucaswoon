@@ -10,7 +10,8 @@ body {
     width: 100vw;
     height: 100vh;
     font-family: "Inter", sans-serif;
-    font-size: 1.5vw;
+    font-size: 1.75vw;
+    font-weight: 300;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,10 +21,23 @@ body {
 .mainHeader {
     font-family: "Inter", sans-serif;
     font-size: 3vw;
+    width: 80vw;
+    text-align: center;
 }
 
 .bodySection {
     display: flex;
+    justify-content: space-evenly;
+    width: 80vw;
+}
+
+.leftSide {
+    display: flex;
+    flex-direction: column;
+}
+
+.leftDiv {
+    margin-bottom: 1.5vw;
 }
 
 .pokeImage {
@@ -31,6 +45,7 @@ body {
     border-width: 0.25vw;
     border-color: black;
     border-style: solid;
+    padding: 1.25vw;
 }
 
 .pokeName {
@@ -43,6 +58,28 @@ body {
     border-radius: 0.5vw;
 }
 
+.typesParagraph {
+    font-size: 1.25vw;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0.7vw;
+}
+
+.pokeTypesContainer {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.pokeType {
+    font-size: 1.25vw;
+    padding: 0.35vw;
+    padding-left: 0.8vw;
+    padding-right: 0.8vw;
+    text-align: center;
+    border-radius: 0.5vw;
+    margin-right: 0.8vw;
+}
+
 .arrows {
     display: flex;
     justify-content: space-evenly;
@@ -52,8 +89,8 @@ body {
     background-color: #E8E8E8;
     border-style: none;
     border-radius: 0.5vw;
-    padding-left: 2vw;
-    padding-right: 2vw;
+    padding-left: 2.25vw;
+    padding-right: 2.25vw;
     display: flex;
     align-items: center;
 }
@@ -67,9 +104,57 @@ body {
 }
 
 .arrowImage {
-    height: 2.5vw;
+    height: 3vw;
 }
 
 #rightArrow {
     transform: scaleX(-1);
+}
+
+.rightSide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.infoMovesParagraph {
+    text-align: center;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0.7vw;
+}
+
+.infoMovesBox {
+    width: 20vw;
+    height: 26vw;
+    padding: 1.25vw;
+    background-color: #E8E8E8;
+}
+
+.infoMovesButtons {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.infoMovesButton {
+    background-color: #E8E8E8;
+    font-size: 1.75vw;
+    font-weight: 300;
+    border-style: none;
+    border-radius: 0.5vw;
+    width: 8vw;
+    height: 3.5vw;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+.selectedButton {
+    background-color: #7CFF79;
+}
+
+.unselectedButton:hover {
+    background-color: #E0E0E0;
 }

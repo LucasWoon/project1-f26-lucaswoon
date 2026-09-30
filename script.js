@@ -22,6 +22,10 @@ const typeColors = {
     fairy: "#D685AD"
 }
 
+const infoBox = document.getElementById('infoBox');
+const movesBox = document.getElementById('movesBox');
+const infoMovesHeader = document.querySelector('.infoMovesParagraph')
+
 async function getPokemonData(id) {
     const response = await fetch('https://pokeapi.co/api/v2/pokemon/' + id);
     
@@ -67,13 +71,24 @@ async function updatePokemonData() {
         pokeType.innerText = eachType.type.name;
         pokeType.style.backgroundColor = typeColors[eachType.type.name];
     })
-    
-    //delete after
-    // document.querySelector('.idThing').innerHTML = data.id
+
+    // update info and moves
+    infoBox.innerHTML = '';
+    infoBox.innerHTML += 'height: ' + (data.height / 10).toFixed(1) + 'm<br>';
+    infoBox.innerHTML += 'weight: ' + (data.weight / 10).toFixed(1) + 'kg<br>';
+    data.stats.forEach((stat) => {
+        infoBox.innerHTML += stat.stat.name + ': ' + stat.base_stat + '<br>';
+    })
+
+    movesBox.innerHTML = '';
+    data.moves.slice(0,10).forEach((move) => {
+        movesBox.innerHTML += move.move.name + '<br>';
+    })
 }
 
 updatePokemonData();
 
+// left button functionality
 document.getElementById('leftArrow').addEventListener('click', () => {
     if (pokeId > 1) {
         pokeId -= 1;
@@ -81,6 +96,7 @@ document.getElementById('leftArrow').addEventListener('click', () => {
     }
 })
 
+// right button functionality
 document.getElementById('rightArrow').addEventListener('click', () => {
     if (pokeId < pokeIdMax) {
         pokeId += 1;
@@ -88,3 +104,34 @@ document.getElementById('rightArrow').addEventListener('click', () => {
     }
 })
 
+// info and moves button functionality
+
+const infoMovesBox = document.querySelector('.infoMovesBox');
+
+
+const infoButton = document.getElementById('infoButton');
+const movesButton = document.getElementById('movesButton');
+
+infoButton.addEventListener('click', () => {
+    if (infoButton.classList.contains('unselectedButton')) {
+        infoButton.classList.remove('unselectedButton');
+        infoButton.classList.add('selectedButton');
+        movesButton.classList.remove('selectedButton');
+        movesButton.classList.add('unselectedButton');
+        movesBox.classList.add('hidden');
+        infoBox.classList.remove('hidden');
+        infoMovesHeader.innerText = 'Info';
+    }
+})
+
+movesButton.addEventListener('click', () => {
+    if (movesButton.classList.contains('unselectedButton')) {
+        movesButton.classList.remove('unselectedButton');
+        movesButton.classList.add('selectedButton');
+        infoButton.classList.remove('selectedButton');
+        infoButton.classList.add('unselectedButton');
+        infoBox.classList.add('hidden');
+        movesBox.classList.remove('hidden');
+        infoMovesHeader.innerText = 'Moves';
+    }
+})
